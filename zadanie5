@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+ 
+namespace priora2
+{
+    internal class Pet
+    {
+        private string name;
+        private int energy;
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }   
+        public int Energy
+        {
+            get { return energy; }
+            set
+            {
+                if (value < 0 || value > 100)
+                {
+                    Console.WriteLine("Энергия должна быть от 0 до 100!");
+                }
+                else
+                {
+                    energy = value;
+                }
+            }
+        }
+        public Pet(string name, int energy)
+        {
+            this.name = name;
+            this.Energy = energy;
+        }
+
+        public void Play()
+        {
+            energy = Math.Max(0, energy - 20);
+            Console.WriteLine($"{name} играет, энергия: {energy}.");
+        }
+
+        public void Rest()
+        {
+            energy = Math.Min(100, energy + 30);
+            Console.WriteLine($"{name} отдыхает, энергия: {energy}.");
+        }
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Pet myPet = new Pet("Гламур", 52);
+            myPet.Play();  
+            myPet.Rest();  
+            myPet.Energy = 150; 
+            myPet.Play();  
+        }
+    }
+}
